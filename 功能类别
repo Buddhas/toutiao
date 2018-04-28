@@ -1,0 +1,23 @@
+1：下拉刷新功能  80%(4-19遗留问题是better-scroll的父warpper的height获取不正确，导致不能正常滚动，现在固定了warpper高度)
+2：首次进入页面，数据内容应显示 
+ (4-19解决，总结：对computed和watch的区别，以及computed在何时触发有了深入的了解，(1)watch比较适合一个数据改变之后，联动多个数据的改变，比如在home组件中
+ ，根据路由的变化，可以对新闻列表进行改变，但是这一个例子对watch的理解不够深入，从反面来，在computed使用中，news根据newsList和路由路径改变
+ 如果用watch需要监听两个变量，这是很费时间的)
+3：收藏功能实现
+4：评论页面开发(90 4-24)
+5：新闻详情页面完善（95%  4-23）
+6：微信分享页面开发
+7：搜索页面开发
+8：不喜欢的新闻移除功能
+9：图灵机器人接口调用
+10：用户中心页面开发
+11：拖拽功能实现
+
+
+jsonp(`https://www.toutiao.com/search_content/?offset=${offset}&format=json&keyword=${keyword}&autoload=true&count=20&cur_tab=1`,{timeout:5000},
+function(err,res){
+if(!err && res.data){
+resolve(res.data)
+}
+}
+})
