@@ -1,5 +1,7 @@
 <template>
+
    <div class="channelWrapper">
+       <div class="back" @click="back"><img src="../../assets/image/back.png" alt="" height="30" width="30"></div>
         <div class="subscribed">
             <div class="subscribe_head">
                 <p>点击移除频道</p>
@@ -10,33 +12,40 @@
             @end="move"
             :options="{group:'people'}"
             >
-                <div class="subscribe_item" 
-                v-for='(item,index) in subscribeList' 
-                :key="index"
-                >
-                    {{item.name}}
-                </div>
+            <transition-group class="subscribe_group" name="list">
+                    <div class="subscribe_item" 
+                    v-for='(item,index) in subscribeList' 
+                    :key="index" @click.stop="_deleteSubscribe(index)"
+                    >
+                        {{item.text}}
+                    </div>
+                </transition-group>
+              
             </draggable>
         </div>
         <div class="subscribe_no">
             <div class="subscribe_no_head">
                 <p>点击添加频道</p>
             </div>
-            <draggable class="subscribe_no_list">
+            <draggable class="subscribe_no_list" :options="{group:'subscribe'}">
+                <transition-group class="subscribe_group" name="list">
                 <div class="subscribe_no_item" 
                 v-for='(item,index) in subscribeNoList' 
                 :key="index"
-                @start="move()"
-                @end="move()">
-                    {{item.name}}
+                @start="move"
+                @end="move" 
+                @click.stop="_addSubscribe(index)">
+                    {{item.text}}
                 </div>
+            </transition-group>
             </draggable>
         </div>
    </div>
+
 </template>
 
 <script>
-    import {mapGetters,mapMutations} from 'vuex'
+    import {mapGetters,mapMutations,mapActions} from 'vuex'
     import draggable from 'vuedraggable'
 
 
@@ -49,13 +58,29 @@
             }
         },
         methods: {
-            move(){
-                this.isDrag = !this.isDrag
-            },
+            
             ...mapMutations({
                 setSubscribe:'SET_SUBSCRIBE',
                 setSubscribeNo:'SET_SUBSCRIBE_NO'
-            })
+            }),
+            ...mapActions([
+                'deleteSubscribe',
+                'addSubscribe'
+            ]),
+            move(){
+                this.isDrag = !this.isDrag
+            },
+            _deleteSubscribe(index){
+                
+                this.deleteSubscribe(index)
+            },
+            back(){
+                this.$router.back()
+            },
+            _addSubscribe(index){
+                
+                this.addSubscribe(index)
+            }
         },
         created () {
             this.subscribeList = this.subscribe
@@ -76,7 +101,6 @@
                 }
                 this.$nextTick(()=>{
                     let tmp_subscribe = this.subscribeList
-                   
                     this.setSubscribe(tmp_subscribe)
                 })
                 
@@ -109,14 +133,18 @@
                 flex-wrap:wrap
                 width:100%
                 margin-top:15px
-                .subscribe_item
-                    width:20%
-                    height:25px
-                    line-height:25px
-                    text-align:center
-                    margin-right:15px
-                    margin-bottom:10px
-                    border:1px solid #ccc
+                .subscribe_group
+                    display: flex
+                    flex-wrap:wrap
+                    width:100%
+                    .subscribe_item
+                        width:20%
+                        height:25px
+                        line-height:25px
+                        text-align:center
+                        margin-right:15px
+                        margin-bottom:10px
+                        border:1px solid #ccc
         .subscribe_no
             background-color:#ffffff
             width:100%
@@ -132,6 +160,11 @@
                 flex-wrap:wrap
                 width:100%
                 margin-top:15px
+                .subscribe_group
+                    display: flex
+                    flex-wrap:wrap
+                    width:100%
+                    margin-top:15px
                 .subscribe_no_item
                     width:20%
                     height:25px
@@ -140,6 +173,14 @@
                     margin-right:15px
                     margin-bottom:10px
                     border:1px solid #ccc
+
+    .list-enter-active, .list-leave-active
+        transition: all 1s
+    .list-enter, .list-leave-to
+        opacity: 0
+        transform: translateY(30px)
+    
+
 
         
                 

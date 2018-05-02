@@ -7,17 +7,19 @@
 4：评论页面开发(90 4-24)
 5：新闻详情页面完善（95%  4-23）
 6：微信分享页面开发
-7：搜索页面开发
-8：不喜欢的新闻移除功能
-9：图灵机器人接口调用
-10：用户中心页面开发
-11：拖拽功能实现
+7：搜索页面开发  
+(5-1,遇到)
+8：拖拽功能实现
 
 
-jsonp(`https://www.toutiao.com/search_content/?offset=${offset}&format=json&keyword=${keyword}&autoload=true&count=20&cur_tab=1`,{timeout:5000},
-function(err,res){
-if(!err && res.data){
-resolve(res.data)
-}
-}
-})
+问题：
+（1） better-scroll高度计算不正确
+（2） 收藏不能取消，图标也没有改变
+（3） transition有误
+（4） 拖拽功能还未实现
+（5） 函数节流中this指向不正确
+
+
+
+
+

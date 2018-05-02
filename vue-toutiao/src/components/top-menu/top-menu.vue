@@ -1,11 +1,12 @@
 <template>
     
     <div class="top_menu_bar">
-        <div class="top_menu_more">
-            
+        <div class="top_menu_more" @click="toChannel">
+                <img src="../../assets/image/open.png" alt="" height="30" width="30">
         </div>
         <scroll class="top-content">
             <div class="top_menu_wrapper" ref="topMenuWrapper">
+                
                 <ul class="top_menu_list" ref="topMenuList">
                     <router-link v-for="(item,index) in subscribe" 
                         :to="item.url + '/' + item.type" 
@@ -16,6 +17,7 @@
                         {{item.text}}
                     </router-link>
                 </ul>
+                
             </div>
         </scroll>
     </div>
@@ -43,9 +45,11 @@
                    widthAll = widthAll + list[i].clientWidth
                }
                this.$refs.topMenuWrapper.style.width = widthAll + 'px'
+           },
+           toChannel(){
+               this.$router.push('/channel')
            }
         },
-
         computed:{
             ...mapGetters([
                'newList',
@@ -67,12 +71,19 @@
         background-color:#f0f0f3
         .top_menu_more
             position: absolute
-            top:0px
+            height:52px
+            width:40px
+            background-color:#f0f0f3
+            text-align:center
+            line-height:4
             right:0px
-            z-index: 100
+            z-index: 200
         .top-content
             width:100%
+            position: relative
             .top_menu_wrapper
+                position: relative
+                display:flex
                 .top_menu_list
                     display: flex
                     margin-left:10px
@@ -86,7 +97,12 @@
                         font-family:Arial,Verdana,Sans-serif
                         font-weight:200
                         &.router-link-active
-                            color:red              
+                            color:red   
+                .toChannel
+                    position:fixed
+                    top:0
+                    right:0
+                    z-index:200
 
 
             

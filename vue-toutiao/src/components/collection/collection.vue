@@ -1,11 +1,14 @@
 <template>
-    <div class="collection-warpper">
-        <div class="head">
-            <span>我的收藏</span>  
-            <div class="back" @click="back"><img src="../../assets/image/back.png" height="40" width="40"></div>
+    <transition name="collection">
+        <div class="collection-warpper">
+            <div class="head">
+                <span>我的收藏</span>  
+                <div class="back" @click="back"><img src="../../assets/image/back.png" height="40" width="40"></div>
+            </div>
+            <news-list :newsList="collectionList"></news-list>
         </div>
-        <news-list :newsList="collectionList"></news-list>
-    </div>
+    </transition>
+    
     
 </template>
 
@@ -14,14 +17,18 @@
     import NewsList from 'components/news-list/news-list'
 
     export default{
-        data () {
+        data () {   
             return {
-                collectionList:[]
+                //collectionList:[]
             }
         },
         created () {
-            this.collectionList = this.collection
-            console.log(this.collectionList)
+            //this.collectionList = this.collection
+            //console.log(this.collectionList)
+        },
+        beforeRouteUpdate(){
+           
+            console.log('123')
         },
         methods:{
             back(){
@@ -31,11 +38,16 @@
         computed:{
             ...mapGetters([
                 'collection'
-            ])
+            ]),
+            collectionList(){
+                let collectionList = []
+                collectionList = this.collection
+                return collectionList
+            }
         },
         components: {
             NewsList
-        }
+        },
     }
 </script>
 
@@ -55,4 +67,12 @@
                 position: absolute
                 left:0
                 top:0
+    .collection-enter-active,.collection-leave-active
+      transition: all 0.6s
+    .collection-enter,.collection-leave-to
+      transform: translate3d(100%, 0, 0)
+      
+    
+    
+    
 </style>

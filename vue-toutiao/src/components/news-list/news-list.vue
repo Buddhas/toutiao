@@ -38,6 +38,9 @@
                 selectArticle:{}
             }
         },
+        created () {
+          console.log('newsLIst')  
+        },
         methods: {
             ...mapMutations([
                 "GET_ARTICLE"
@@ -61,6 +64,7 @@
                 
             }
         },
+        
     }
 </script>
 

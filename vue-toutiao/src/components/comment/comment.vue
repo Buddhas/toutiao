@@ -54,6 +54,9 @@
         created () {
            this.getComment()
         },
+        activated () {
+          this.getComment()  
+        },
         computed: {
             ...mapGetters([
                 'selectedArticle'

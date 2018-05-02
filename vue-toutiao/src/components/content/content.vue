@@ -1,5 +1,5 @@
 <template>
-    <transition name="slide">
+    <transition name="content1">
     <div class="new-detail">
         <!-- <router-link to="/comment">123</router-link> -->
         <div class="back" @click="back"><img src="../../assets/image/back.png" height="40" width="40"></div>
@@ -25,7 +25,7 @@
             <router-link to="/comment" class="comment" tag="span">
                 <img src="../../assets/image/comment.png" alt="">
             </router-link>
-           <span class="collection" @click="addCollection"><img src="../../assets/image/collection.png" alt=""></span>
+           <span class="collection" @click="addCollection"><img src="../../assets/image/collection.png" alt="" v-show="!isCollection"><img src="../../assets/image/collected.png" alt="" v-show="isCollection"></span>
        </div>
     </div>
 </transition>
@@ -39,18 +39,22 @@
     export default{
         data(){
             return{
-                data:{}
+                data:{},
+                isCollection:false
             }
         },
         created(){
+            this.isCollection = false
             this._getContent()
+            this.hadCollection()
         },
         methods: {
             ...mapMutations({
                 setCollection:'COLLECTION'
             }),
             ...mapActions([
-                'saveCollections'
+                'saveCollections',
+                'deleteCollections'
             ]),
             _getContent(){
                 getContent(this.$route.params.id).then((data)=>{
@@ -61,13 +65,40 @@
                 this.$router.back()
             },
             addCollection(){
-                this.saveCollections(this.selectedArticle)
+                if(!this.isCollection){
+                    this.saveCollections(this.selectedArticle)
+                    this.isCollection = true
+                }else{
+                    //console.log(this.selectedArticle)
+                    let item = this.selectedArticle
+                    this.deleteCollections(item)
+                    this.isCollection = false
+                }
+               
+            },
+            hadCollection(){
+                let id = this.$route.params.id
+                let hadCollection = this.collection.findIndex((item) =>{
+                    return item.item_id === id
+                })
+                console.log(hadCollection)
+                if(hadCollection > -1){
+                    this.isCollection = true
+                }else{
+                    this.isCollection = false
+                }
             }
         },
         filters: {
             dateForm(date){
                 return moment().format('L');
             }
+        },
+        activated(){
+            this._getContent()
+            this.hadCollection()
+            window.scrollTo(0,0)
+            
         },
         computed: {
             ...mapGetters([
@@ -79,6 +110,10 @@
 </script>
 
 <style lang="stylus">
+
+    
+
+    
     .new-detail
         width:100%
         .back
@@ -183,17 +218,19 @@
             .collection
                 margin-left:15px
 
-                
-            
-    
-    
-    
-    
-    .slide-enter-active, .slide-leave-active
-      transition: all 0.6s
+    .content1-leave-active,.content1-enter-active
+        transition: all 50s
+    .content1-enter, .content1-leave-to
+        transform: translate3d(100%, 0, 0)
+    .content1-leave
+        background-color:#ffffff
+    .content1-leave-active
+        background-color:#ffffff
+      
 
-    .slide-enter, .slide-leave-to
-      transform: translate3d(100%, 0, 0)  
+   
+
+  
         
 
 </style>

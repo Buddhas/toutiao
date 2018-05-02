@@ -1,12 +1,10 @@
 <template>
-    <transition name="slide">
+  
     <div class="home-wrapper">
       <Head></Head>
-      <div class="empty-content"></div>
       <div class="top_menu">
           <top-menu></top-menu>
       </div>
-      <div class="empty-menu" ></div>
       <scroll class="scroll-item" :pullDownRefresh="pullDownRefresh" @pulldown="loadMore" :over="over" @over="transformOver">
         <div class="content-wrapper">
           <keep-alive>
@@ -15,7 +13,7 @@
         </div>
     </scroll>
     </div>
-   </transition>
+
 </template>
 
 <script>
@@ -111,27 +109,18 @@ export default {
   .home-wrapper
     width:100%
     height:100%
-    .empty-content
-      width:100%
-      height:50px
     .top_menu
       position: fixed
       top:50px
       width:100%
       height:52px
-      z-index: 100
-    .empty-menu
-      width:100%
-      height:52px
     .scroll-item
-      height:700px
+      position: fixed
+      top:102px
+      height:100%
       overflow: hidden
-    .slide-enter-active, .slide-leave-active
-      transition: all 0.3s
-
-    .slide-enter, .slide-leave-to
-      transform: translate3d(100%, 0, 0)  
       
+   
         
      
 

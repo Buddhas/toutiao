@@ -1,7 +1,7 @@
 <template>
   <div class="tabWrapper">
       <HeadContent>
-          <img src="../../assets/image/message.png" alt="邮箱" slot='headPorprait' class="message-img">
+          <img src="../../assets/image/collectionPage.png" alt="邮箱" slot='headPorprait' class="message-img" @click="toCollection">
           <img src="../../assets/image/search.png" alt="查询" slot='relVideo' class="search-img" @click="toSearch">
       </HeadContent>
   </div>
@@ -14,6 +14,9 @@
         methods:{
             toSearch(){
                 this.$router.push('/search')
+            },
+            toCollection(){
+                this.$router.push('/collection')
             }
         },
         components:{
@@ -31,6 +34,7 @@
         line-height :50px
         left: 0px
         top: 0px
-        z-index:100
+       
+        
 </style>
 
