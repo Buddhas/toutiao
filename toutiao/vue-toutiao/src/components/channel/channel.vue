@@ -1,7 +1,7 @@
 <template>
 <transition name="channel">
 
-
+                                                        
    <div class="channelWrapper">
        <div class="back" @click="back"><img src="../../assets/image/open.png" alt="" height="30" width="30"></div>
         <div class="subscribed">
