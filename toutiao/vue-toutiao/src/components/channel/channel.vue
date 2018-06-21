@@ -73,7 +73,6 @@
                 this.isDrag = !this.isDrag
             },
             _deleteSubscribe(index){
-                
                 this.deleteSubscribe(index)
             },
             back(){

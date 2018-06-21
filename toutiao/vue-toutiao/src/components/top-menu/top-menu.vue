@@ -47,6 +47,7 @@
                for(let i = 0; i < list.length; i++){
                    widthAll = widthAll + ((list[i].clientWidth == 0) ? 59 : list[i].clientWidth)
                }
+              
                this.$refs.topMenuWrapper.style.width = widthAll + 'px'
            },
            toChannel(){

@@ -83,7 +83,8 @@ export default {
       }
   },
   activated(){
-      this.$refs.homeWrapper.click//主动触发事件，解决从收藏页面和搜索页面回来时图片显示不正确的现象
+      console.log('1')
+      //this.$refs.homeWrapper.click//主动触发事件，解决从收藏页面和搜索页面回来时图片显示不正确的现象
   },
   watch: {
     $route(to,from){

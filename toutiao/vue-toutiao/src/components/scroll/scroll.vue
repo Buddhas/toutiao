@@ -74,6 +74,7 @@ export default {
             })
          if (this.listenScroll) {
             this.scroll.on('scroll', (pos) => {
+                
                 this.Y = pos.y
             })
          }
@@ -86,13 +87,7 @@ export default {
             
           }
       },
-      scroll1(){
-        if (this.listenScroll) {
-          this.scroll.on('scroll', (pos) => {
-            console.log(pos.y)
-          })
-        }
-      },
+     
       refresh() {
         this.scroll && this.scroll.refresh()
       },
@@ -105,6 +100,7 @@ export default {
   activated () {
     if(this.listenScroll && this.scroll){
         this.scroll.scrollTo(0,this.Y,0)
+        this.refresh()
     }
   },
   watch: {
@@ -117,6 +113,7 @@ export default {
       data(){
             setTimeout(() => {
                 this.$nextTick(()=>{
+                    
                     this.refresh()
                 })
             }, 20)

@@ -17,7 +17,7 @@ export default new Router({
   routes: [
     {
       path:'/',
-      redirect: '/home/__all__'
+      redirect: '/home/news_hot'
     },
     {
       path:'/home/:type',
