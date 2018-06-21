@@ -8,7 +8,7 @@
             </br>
             <span>暂无评论</span>
         </div>
-        <scroll class="scroll-item">
+        <scroll class="scroll-item" :data="commentList">
             <div>
                 <ul class="comment-list" v-if="commentList.length">
                     <li v-for="(item,index) in commentList" :key="item.id" class="item">
@@ -97,8 +97,10 @@
         .scroll-item
             height:100%
             overflow: hidden
+            
         .comment-list
             width:95%
+            padding-bottom:50px
             margin:0 auto
             .item
                margin-bottom:15px
