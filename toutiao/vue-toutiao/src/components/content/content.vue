@@ -1,5 +1,5 @@
 <template>
-    <transition name="content1">
+    <transition name="content1" mode="out-in">
     <div class="new-detail">
         <!-- <router-link to="/comment">123</router-link> -->
         <div class="back" @click="back"><img src="../../assets/image/back.png" height="40" width="40"></div>
@@ -22,9 +22,9 @@
                <input type="text">
                <span class="write-comment"><img src="../../assets/image/writeComment.png" alt=""><span class="write-comment-text">写评论...</span></span>
             </div>
-            <router-link to="/comment" class="comment" tag="span">
+            <!-- <router-link to="/comment" class="comment" tag="span">
                 <img src="../../assets/image/comment.png" alt="">
-            </router-link>
+            </router-link> -->
            <span class="collection" @click="addCollection"><img src="../../assets/image/collection.png" alt="" v-show="!isCollection"><img src="../../assets/image/collected.png" alt="" v-show="isCollection"></span>
        </div>
     </div>
