@@ -40,14 +40,19 @@
                 this.getMenuWidth()
             })
         },
+        activated () {
+          this.getMenuWidth()  
+        },
         methods: {
            getMenuWidth(){//动态获取滚动条宽度
                let list = this.$refs.topMenuList.children
+               
                let widthAll = 0
                for(let i = 0; i < list.length; i++){
-                   widthAll = widthAll + ((list[i].clientWidth == 0) ? 59 : list[i].clientWidth)
+                //    widthAll = widthAll + ((list[i].clientWidth == 0) ? 59 : list[i].clientWidth)
+                widthAll = widthAll + list[i].clientWidth
                }
-              
+               widthAll = widthAll + 59
                this.$refs.topMenuWrapper.style.width = widthAll + 'px'
            },
            toChannel(){
@@ -63,9 +68,9 @@
         },
         watch: {
             subscribe(){
-                setTimeout(() => {
+                this.$nextTick(()=>{
                     this.getMenuWidth()
-                }, 20);
+                })
             }
         },
 
